@@ -9,6 +9,13 @@
 		"style": {
 			"navigationBarTitleText": "uni-app"
 		}
+	},
+	{
+		"path" : "pages/ProfilePage/ProfilePage",
+		"style" : 
+		{
+			"navigationBarTitleText" : "我的"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
