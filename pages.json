@@ -5,9 +5,9 @@
 		}
 	},
 	"pages": [{
-		"path": "pages/index/index",
+		"path": "pages/Purse/Purse",
 		"style": {
-			"navigationBarTitleText": "uni-app"
+			"navigationBarTitleText": "钱包"
 		}
 	},
 	{
@@ -22,6 +22,41 @@
 		"style" : 
 		{
 			"navigationBarTitleText" : "我的资料"
+		}
+	},
+	{
+		"path" : "pages/Purse/Xianjin/Xianjin",
+		"style" : 
+		{
+			"navigationBarTitleText" : "现金"
+		}
+	},
+	{
+		"path" : "pages/Purse/Chuxuka/Chuxuka",
+		"style" : 
+		{
+			"navigationBarTitleText" : "储蓄卡"
+		}
+	},
+	{
+		"path" : "pages/Purse/Xinyongka/Xinyongka",
+		"style" : 
+		{
+			"navigationBarTitleText" : "信用卡"
+		}
+	},
+	{
+		"path" : "pages/Purse/Zhifubao/Zhifubao",
+		"style" : 
+		{
+			"navigationBarTitleText" : "支付宝"
+		}
+	},
+	{
+		"path" : "pages/Purse/Wechat/Wechat",
+		"style" : 
+		{
+			"navigationBarTitleText" : "微信"
 		}
 	}],
 	"globalStyle": {
