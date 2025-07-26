@@ -9,6 +9,7 @@
 					<text style="font-size: 10px;">{{Desription}}</text>
 				</template>
 			</iui-avatar>
+			<uni-icons type="right"></uni-icons>
 		</view>
 	</view>
 </template>
@@ -23,9 +24,12 @@
 	const Desription = ref("用户ID :" + userID.value);
 </script>
 
-<style lang="scss"> 
-.avatar-profile{
-	background-color: white;
-	padding: 20px;
-}
+<style lang="scss">
+	.avatar-profile {
+		background-color: white;
+		padding: 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 </style>
