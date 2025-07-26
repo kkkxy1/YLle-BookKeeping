@@ -67,5 +67,17 @@
 		"app-plus": {
 			"background": "#efeff4"
 		}
+	},
+	"tabBar": {
+		"list": [
+			{
+				"text": "钱包",
+				"pagePath": "pages/Purse/Purse"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/ProfilePage/ProfilePage"
+			}
+		]
 	}
 }
