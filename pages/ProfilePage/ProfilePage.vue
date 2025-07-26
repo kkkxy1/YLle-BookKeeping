@@ -34,9 +34,13 @@
 	import {
 		ref
 	} from 'vue';
-
-	const userName = ref("请输入昵称");
-	const userID = ref("123456789");
+	import {
+		useUserStore
+	} from '@/stores/user'
+	
+	const user = useUserStore();
+	const userName = ref(user.name);
+	const userID = ref(user.id);
 	const Desription = ref("用户ID :" + userID.value);
 </script>
 
