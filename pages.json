@@ -1,4 +1,9 @@
 {
+	"easycom": {
+		"custom": {
+			"^iui-(.*)": "@/components/iui-design/components/iui-$1/iui-$1.vue"
+		}
+	},
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
