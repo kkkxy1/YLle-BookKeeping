@@ -23,6 +23,37 @@
 		{
 			"navigationBarTitleText" : "现金"
 		}
+	},
+	{
+		"path" : "pages/Purse/Chuxuka/Chuxuka",
+		"style" : 
+		{
+			"navigationBarTitleText" : "储蓄卡"
+		}
+	},
+	{
+		"path" : "pages/Purse/Xinyongka/Xinyongka",
+		"style" : 
+		{
+			"navigationBarTitleText" : "信用卡\r
+	\t\t"
+		}
+	},
+	{
+		"path" : "pages/Purse/Zhifubao/Zhifubao",
+		"style" : 
+		{
+			"navigationBarTitleText" : "支付宝\r
+	\t\t"
+		}
+	},
+	{
+		"path" : "pages/Purse/Wechat/Wechat",
+		"style" : 
+		{
+			"navigationBarTitleText" : "微信\r
+	\t\t"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
