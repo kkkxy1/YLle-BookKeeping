@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="profile">
 		<view class="avatar-profile">
 			<iui-avatar :size="72" :avatarName="userName" :avatarDesc="Desription">
 				<template #avatarName>
@@ -11,6 +11,22 @@
 			</iui-avatar>
 			<uni-icons type="right"></uni-icons>
 		</view>
+		<iui-collapse-group accordion>
+			<iui-collapse label="修改密码">
+			</iui-collapse>
+		</iui-collapse-group>
+		<iui-collapse-group accordion>
+			<iui-collapse label="手机绑定" extra="未绑定">
+			</iui-collapse>
+			<iui-collapse label="邮箱绑定" extra="未绑定">
+			</iui-collapse>
+		</iui-collapse-group>
+		<iui-list arrow>
+			<iui-cell label="账单导出"></iui-cell>
+			<iui-cell label="账单发送"></iui-cell>
+			<iui-cell label="邀请好友"></iui-cell>
+		</iui-list>
+		<iui-cell label="关于应用" arrow></iui-cell>
 	</view>
 </template>
 
@@ -25,6 +41,12 @@
 </script>
 
 <style lang="scss">
+	.profile {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
 	.avatar-profile {
 		background-color: white;
 		padding: 20px;
