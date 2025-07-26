@@ -5,9 +5,9 @@
 		}
 	},
 	"pages": [{
-		"path": "pages/index/index",
+		"path": "pages/Purse/Purse",
 		"style": {
-			"navigationBarTitleText": "uni-app"
+			"navigationBarTitleText": "钱包"
 		}
 	},
 	{
@@ -15,6 +15,13 @@
 		"style" : 
 		{
 			"navigationBarTitleText" : "我的"
+		}
+	},
+	{
+		"path" : "pages/Purse/Xianjin/Xianjin",
+		"style" : 
+		{
+			"navigationBarTitleText" : "现金"
 		}
 	}],
 	"globalStyle": {
