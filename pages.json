@@ -1,8 +1,62 @@
 {
+	"easycom": {
+		"custom": {
+			"^iui-(.*)": "@/components/iui-design/components/iui-$1/iui-$1.vue"
+		}
+	},
 	"pages": [{
-		"path": "pages/index/index",
+		"path": "pages/Purse/Purse",
 		"style": {
-			"navigationBarTitleText": "uni-app"
+			"navigationBarTitleText": "钱包"
+		}
+	},
+	{
+		"path" : "pages/ProfilePage/ProfilePage",
+		"style" : 
+		{
+			"navigationBarTitleText" : "我的"
+		}
+	},
+	{
+		"path" : "pages/ProfilePage/MyProfile/MyProfile",
+		"style" : 
+		{
+			"navigationBarTitleText" : "我的资料"
+		}
+	},
+	{
+		"path" : "pages/Purse/Xianjin/Xianjin",
+		"style" : 
+		{
+			"navigationBarTitleText" : "现金"
+		}
+	},
+	{
+		"path" : "pages/Purse/Chuxuka/Chuxuka",
+		"style" : 
+		{
+			"navigationBarTitleText" : "储蓄卡"
+		}
+	},
+	{
+		"path" : "pages/Purse/Xinyongka/Xinyongka",
+		"style" : 
+		{
+			"navigationBarTitleText" : "信用卡"
+		}
+	},
+	{
+		"path" : "pages/Purse/Zhifubao/Zhifubao",
+		"style" : 
+		{
+			"navigationBarTitleText" : "支付宝"
+		}
+	},
+	{
+		"path" : "pages/Purse/Wechat/Wechat",
+		"style" : 
+		{
+			"navigationBarTitleText" : "微信"
 		}
 	}],
 	"globalStyle": {
@@ -13,5 +67,17 @@
 		"app-plus": {
 			"background": "#efeff4"
 		}
+	},
+	"tabBar": {
+		"list": [
+			{
+				"text": "钱包",
+				"pagePath": "pages/Purse/Purse"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/ProfilePage/ProfilePage"
+			}
+		]
 	}
 }
