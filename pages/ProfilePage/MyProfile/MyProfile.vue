@@ -188,6 +188,7 @@
 					userSex.value = user.sex;
 					userBirthday.value = user.birthday;
 					userTag.value = user.tag;
+					avatarUrl.value = user.url;
 
 					uni.showToast({
 						title: '已重置',
