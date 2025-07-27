@@ -1,16 +1,18 @@
 <template>
 	<view class="profile">
-		<view class="avatar-profile">
-			<iui-avatar :size="72" :avatarName="userName" :avatarDesc="Desription">
-				<template #avatarName>
-					<text style="font-size: 16px;">{{userName}}</text>
-				</template>
-				<template #avatarDesc>
-					<text style="font-size: 10px;">{{Desription}}</text>
-				</template>
-			</iui-avatar>
-			<uni-icons type="right"></uni-icons>
-		</view>
+		<navigator url='/pages/ProfilePage/MyProfile/MyProfile'>
+			<view class="avatar-profile">
+				<iui-avatar :size="72" :src="userUrl" :avatarName="userName" :avatarDesc="Desription">
+					<template #avatarName>
+						<text style="font-size: 16px;">{{userName}}</text>
+					</template>
+					<template #avatarDesc>
+						<text style="font-size: 10px;">{{Desription}}</text>
+					</template>
+				</iui-avatar>
+				<uni-icons type="right"></uni-icons>
+			</view>
+		</navigator>
 		<iui-collapse-group accordion>
 			<iui-collapse label="修改密码">
 			</iui-collapse>
@@ -32,16 +34,18 @@
 
 <script setup>
 	import {
-		ref
+		ref,
+		computed
 	} from 'vue';
 	import {
 		useUserStore
 	} from '@/stores/user'
-	
+
 	const user = useUserStore();
-	const userName = ref(user.name);
-	const userID = ref(user.id);
-	const Desription = ref("用户ID :" + userID.value);
+	const userName = computed(() => user.name);
+	const userID = computed(() => user.id);
+	const Desription = computed(() => "用户ID :" + user.id);
+	const userUrl = computed(() => user.url);
 </script>
 
 <style lang="scss">
