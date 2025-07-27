@@ -13,16 +13,16 @@
 				<uni-icons type="right"></uni-icons>
 			</view>
 		</navigator>
-		<iui-collapse-group accordion>
-			<iui-collapse label="修改密码">
-			</iui-collapse>
-		</iui-collapse-group>
-		<iui-collapse-group accordion>
-			<iui-collapse label="手机绑定" extra="未绑定">
-			</iui-collapse>
-			<iui-collapse label="邮箱绑定" extra="未绑定">
-			</iui-collapse>
-		</iui-collapse-group>
+		<iui-list arrow>
+			<iui-cell label="修改密码">
+			</iui-cell>
+		</iui-list>
+		<iui-list arrow>
+			<iui-cell label="手机绑定" extra="未绑定">
+			</iui-cell>
+			<iui-cell label="邮箱绑定" extra="未绑定">
+			</iui-cell>
+		</iui-list>
 		<iui-list arrow>
 			<iui-cell label="账单导出"></iui-cell>
 			<iui-cell label="账单发送"></iui-cell>
