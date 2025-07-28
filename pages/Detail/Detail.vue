@@ -105,6 +105,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		background: linear-gradient(to bottom, #f0f0f0 10%, #ffffff 20%);
+		min-height: 100vh;
 	}
 
 	.header-container {
@@ -224,18 +226,20 @@
 		font-weight: bold;
 		margin-bottom: -10rpx;
 	}
+
 	.box3 .expense-statistic /deep/ .iui-statistic-title {
 		font-family: "黑体";
 		font-size: 12px;
 		color: #000000;
 		font-weight: bold;
 		margin-bottom: -10rpx;
-	} 
+	}
+
 	.box3 .income-statistic /deep/ .iui-statistic-value,
 	.box3 .expense-statistic /deep/ .iui-statistic-value {
-	    font-size: 16px;
-	    color: #000000;
-	    font-family: "黑体";
-	    font-weight: bold;
+		font-size: 16px;
+		color: #000000;
+		font-family: "黑体";
+		font-weight: bold;
 	}
 </style>
