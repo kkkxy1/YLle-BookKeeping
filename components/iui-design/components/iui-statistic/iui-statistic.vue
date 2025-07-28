@@ -111,16 +111,21 @@ const formatValue = computed(() => {
 <style lang="scss" scoped>
 @import "../../style/index.scss";
 .iui-statistic {
+  text-align: center; /* 整体居中 */
+
   &-title {
     font-size: $font-size-small;
     color: $color-text-light;
+    text-align: center; /* 标题居中 */
   }
 
   &-value {
     font-size: $font-size-title;
-    display: inline-flex;
+    display: flex; /* 改为 flex 布局 */
     align-items: baseline;
+    justify-content: center; /* 数值内容居中 */
     color: $color-text;
+    text-align: center; /* 文本居中 */
 
     &-prefix {
       font-size: $font-size-small;
@@ -136,6 +141,7 @@ const formatValue = computed(() => {
   &-extra {
     font-size: $font-size-small;
     color: $color-text-light;
+    text-align: center; /* 额外信息居中 */
   }
 }
 </style>
