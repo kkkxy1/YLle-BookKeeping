@@ -14,14 +14,20 @@
 			</view>
 		</navigator>
 		<iui-list arrow>
-			<iui-cell label="修改密码" @click="showPasswordPopup">
-			</iui-cell>
+			<view @click="showPasswordPopup">
+				<iui-cell label="修改密码">
+				</iui-cell>
+			</view>
 		</iui-list>
 		<iui-list arrow>
-			<iui-cell label="手机绑定" :extra="phoneStatus" @click="showPhonePopup">
-			</iui-cell>
-			<iui-cell label="邮箱绑定" :extra="emailStatus" @click="showEmailPopup">
-			</iui-cell>
+			<view @click="showPhonePopup">
+				<iui-cell label="手机绑定" :extra="phoneStatus">
+				</iui-cell>
+			</view>
+			<view @click="showEmailPopup">
+				<iui-cell label="邮箱绑定" :extra="emailStatus">
+				</iui-cell>
+			</view>
 		</iui-list>
 		<iui-list arrow>
 			<iui-cell label="账单导出"></iui-cell>

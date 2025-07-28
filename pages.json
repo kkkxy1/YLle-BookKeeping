@@ -5,11 +5,20 @@
 		}
 	},
 	"pages": [{
+			"path" : "pages/Detail/Detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "明细"
+			}
+		},
+		
+		{
 		"path": "pages/Purse/Purse",
 		"style": {
 			"navigationBarTitleText": "钱包"
 		}
 	},
+	 
 	{
 		"path" : "pages/ProfilePage/ProfilePage",
 		"style" : 
@@ -58,6 +67,34 @@
 		{
 			"navigationBarTitleText" : "微信"
 		}
+	},
+	{
+		"path" : "pages/Detail/Daily/Daily",
+		"style" : 
+		{
+			"navigationBarTitleText" : "日常"
+		}
+	},
+	{
+		"path" : "pages/Detail/Search/Search",
+		"style" : 
+		{
+			"navigationBarTitleText" : "搜索"
+		}
+	},
+	{
+		"path" : "pages/Detail/Add/Add",
+		"style" : 
+		{
+			"navigationBarTitleText" : "支出"
+		}
+	},
+	{
+		"path" : "pages/Detail/Budget/Budget",
+		"style" : 
+		{
+			"navigationBarTitleText" : "预算"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -69,15 +106,29 @@
 		}
 	},
 	"tabBar": {
+		"color": "#dadada",       
+		"selectedColor": "#000000",   
+		"backgroundColor": "#ffffff",  
 		"list": [
 			{
 				"text": "钱包",
-				"pagePath": "pages/Purse/Purse"
+				"pagePath": "pages/Purse/Purse",
+				"iconPath": "/static/wallet.png",
+				"selectedIconPath": "/static/walletfill.png"
+			},
+			{
+				"text": "明细",
+				"pagePath": "pages/Detail/Detail",
+				"iconPath": "/static/budge.png",
+				"selectedIconPath": "/static/bedgefill.png"
 			},
 			{
 				"text": "我的",
-				"pagePath": "pages/ProfilePage/ProfilePage"
+				"pagePath": "pages/ProfilePage/ProfilePage",
+				"iconPath": "/static/my.png",
+				"selectedIconPath": "/static/myfill.png"
 			}
+		
 		]
 	}
 }
