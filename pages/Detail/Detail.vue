@@ -184,9 +184,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: white;
 		font-size: 16px;
 		overflow: hidden;
+		background-color: white; 
+		border: 5px solid orange; 
 	}
 
 	.budget-statistic {
@@ -201,7 +202,7 @@
 	.box2 .budget-statistic /deep/ .iui-statistic-title {
 		font-family: "黑体";
 		font-size: 16px;
-		color: #000000;
+		color: orange;
 		font-weight: bold;
 		margin-bottom: -10rpx;
 		margin-left: 15rpx;
@@ -209,7 +210,7 @@
 
 	.box2 .budget-statistic /deep/ .iui-statistic-value {
 		font-size: 22px;
-		color: #000000;
+		color: orange;
 		font-family: "黑体";
 		font-weight: bold;
 	}
