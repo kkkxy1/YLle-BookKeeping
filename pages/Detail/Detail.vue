@@ -46,9 +46,15 @@
 		<navigator url="/pages/Detail/Add/Add">
 			  <uni-icons class="plusempty-icon" type="plusempty" size="40" color="#000000"></uni-icons>
 		</navigator>
-
     </view>
-				
+	
+	<view class="box2">
+	  <navigator url="/pages/Detail/Budget/Budget">
+	    <iui-statistic class="budget-statistic" title="预算剩余" :value="2500" :precision="2"></iui-statistic>
+	  </navigator>
+	</view>			
+		
+		
 </template>
 
 <script>
@@ -173,4 +179,42 @@
 	    align-items: center;
 	    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
 	}
+	.box2 {
+	  margin-left: 250rpx;
+	  margin-top: -18rpx;
+	  width: 120px;
+	  height: 120px;
+	  background-color: orange;
+	  border-radius: 50%;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  color: white;
+	  font-size: 16px;
+	  overflow: hidden; 
+	}
+	
+	.budget-statistic {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: center;
+	  width: 100%;
+	  height: 100%;
+	}
+	
+	.box2 .budget-statistic /deep/ .iui-statistic-title {
+	  font-family: "黑体"; 
+	  font-size: 16px; 
+	  color: #000000;
+	  font-weight: bold;
+	  margin-bottom: -10rpx;
+	}
+	
+	.box2 .budget-statistic /deep/ .iui-statistic-value {
+	    font-size: 22px;
+	    color: #000000;
+		font-family: "黑体";
+		font-weight: bold;
+	  }
 </style>

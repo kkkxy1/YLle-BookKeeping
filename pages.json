@@ -87,6 +87,14 @@
 		{
 			"navigationBarTitleText" : "支出"
 		}
+	},
+	{
+		"path" : "pages/Detail/Budget/Budget",
+		"style" : 
+		{
+			"navigationBarTitleText" : "预算\r
+	\t\t"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
