@@ -54,7 +54,12 @@
 	  </navigator>
 	</view>			
 		
-		
+	
+	<view class="box3">
+	  <iui-statistic class="income-statistic" title="收入：" :value="120" :precision="2"></iui-statistic>
+	  <iui-statistic class="expense-statistic" title="支出：" :value="300" :precision="2"></iui-statistic>
+	</view>
+	
 </template>
 
 <script>
@@ -180,7 +185,7 @@
 	    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
 	}
 	.box2 {
-	  margin-left: 250rpx;
+	  margin-left: 260rpx;
 	  margin-top: -18rpx;
 	  width: 120px;
 	  height: 120px;
@@ -209,6 +214,7 @@
 	  color: #000000;
 	  font-weight: bold;
 	  margin-bottom: -10rpx;
+	  margin-left: 15rpx;
 	}
 	
 	.box2 .budget-statistic /deep/ .iui-statistic-value {
@@ -217,4 +223,29 @@
 		font-family: "黑体";
 		font-weight: bold;
 	  }
+	  
+  .box3 {
+      display: flex;
+      justify-content: space-between;
+      padding: 30rpx 60rpx;
+      margin-top: 30rpx;
+	  margin-left: 10rpx;
+	  margin-right: 30rpx;
+    }
+	
+	.box3 .income-statistic /deep/ .iui-statistic-title {
+	  font-family: "黑体"; 
+	  font-size: 18px; 
+	  color: #000000;
+	  font-weight: bold;
+	  margin-bottom: -10rpx;
+	}
+	
+	.box3 .expense-statistic /deep/ .iui-statistic-title {
+	  font-family: "黑体"; 
+	  font-size: 18px; 
+	  color: #000000;
+	  font-weight: bold;
+	  margin-bottom: -10rpx;
+	}
 </style>
