@@ -93,7 +93,7 @@
 		"path" : "pages/Detail/Budget/Budget",
 		"style" : 
 		{
-			"navigationBarTitleText" : "预算"
+			"navigationBarTitleText" : "日常账本预算设置"
 		}
 	}],
 	"globalStyle": {
