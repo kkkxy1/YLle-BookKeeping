@@ -8,7 +8,7 @@
 		</view>
 	</view>
 
-	<uni-section title="我的账户">
+	<uni-section class="title-box" title="我的账户">
 		<uni-card class="custom-card" title="现金" sub-title="现金账户" extra="￥：0.00" thumbnail="/static/xianjin.jpg"
 			@click="gotoAccount('cash')">
 		</uni-card>
@@ -92,8 +92,25 @@
 		position: absolute;
 		right: 15rpx;
 	}
+	
+	 .uni-section {
+	    margin-bottom: 0 !important; 
+	  }
+	
+	
+	  .title-box :deep(.uni-section__header) {
+	    margin-bottom: -30rpx !important;
+	    padding-top: 20rpx !important;
+	  }
+	
+	  
+	  :deep(.uni-card) {
+	    margin-top: 0rpx !important;
+	    margin-bottom: 20rpx !important;
+	  }
+	
+	  :deep(.uni-card__header) {
+	    padding: 20rpx 30rpx !important; 
+	  }
 
-	.uni-section {
-		margin-bottom: -30px;
-	}
 </style>

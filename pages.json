@@ -10,6 +10,7 @@
 			"navigationBarTitleText": "钱包"
 		}
 	},
+	 
 	{
 		"path" : "pages/ProfilePage/ProfilePage",
 		"style" : 
@@ -58,6 +59,34 @@
 		{
 			"navigationBarTitleText" : "微信"
 		}
+	},
+	{
+		"path" : "pages/Detail/Detail",
+		"style" : 
+		{
+			"navigationBarTitleText" : "明细"
+		}
+	},
+	{
+		"path" : "pages/Detail/Daily/Daily",
+		"style" : 
+		{
+			"navigationBarTitleText" : "日常"
+		}
+	},
+	{
+		"path" : "pages/Detail/Search/Search",
+		"style" : 
+		{
+			"navigationBarTitleText" : "搜索"
+		}
+	},
+	{
+		"path" : "pages/Detail/Add/Add",
+		"style" : 
+		{
+			"navigationBarTitleText" : "支出"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -75,9 +104,14 @@
 				"pagePath": "pages/Purse/Purse"
 			},
 			{
+				"text": "明细",
+				"pagePath": "pages/Detail/Detail"
+			},
+			{
 				"text": "我的",
 				"pagePath": "pages/ProfilePage/ProfilePage"
 			}
+		
 		]
 	}
 }
