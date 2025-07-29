@@ -39,7 +39,7 @@
 		</view>
 		<view class="box2">
 			<navigator url="/pages/Detail/Budget/Budget">
-				<iui-statistic class="budget-statistic" title="预算剩余" :value="2500" :precision="2"></iui-statistic>
+				<iui-statistic class="budget-statistic" title="预算剩余" :value="remain" :precision="2"></iui-statistic>
 			</navigator>
 		</view>
 		<view class="box3">
@@ -52,52 +52,63 @@
 
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				showCalendar: true,
-				currentYearMonth: "",
-				info: {
-					date: '',
-					startDate: '2025-01-01',
-					endDate: '2025-12-31',
-					lunar: false,
-					range: false,
-					insert: false
-				}
-			}
-		},
-		mounted() {
-			this.setCurrentYearMonth();
-		},
-		methods: {
+<script setup>
+	import {
+		ref,
+		onMounted,
+		computed
+	} from 'vue'
+	import {
+		useUserStore
+	} from '@/stores/user'
 
-			setCurrentYearMonth() {
-				const now = new Date();
-				const year = now.getFullYear();
-				const month = now.getMonth() + 1;
-				this.currentYearMonth = `${year}年${month}月`;
-			},
+	const showCalendar = ref(true)
+	const currentYearMonth = ref("")
 
-			open() {
-				this.$refs.calendar.open();
-			},
+	const user = useUserStore();
+	const userBudget = computed(() => user.budget);
+	const userIncome = computed(() => user.income);
+	const userExpenses = computed(() => user.expenses);
+	const remain = computed(() => {
+		return userBudget.value + userIncome.value - userExpenses.value;
+	});
 
+	const info = ref({
+		date: '',
+		startDate: '2025-01-01',
+		endDate: '2025-12-31',
+		lunar: false,
+		range: false,
+		insert: false
+	})
 
-			close() {
-				console.log('日历关闭');
-			},
+	const calendar = ref(null)
 
-
-			confirm(e) {
-				console.log('选择的日期:', e);
-
-				const [year, month] = e.fulldate.split('-');
-				this.currentYearMonth = `${year}年${parseInt(month)}月`;
-			}
-		}
+	const setCurrentYearMonth = () => {
+		const now = new Date()
+		const year = now.getFullYear()
+		const month = now.getMonth() + 1
+		currentYearMonth.value = `${year}年${month}月`
 	}
+
+	const open = () => {
+		calendar.value?.open()
+	}
+
+	const close = () => {
+		console.log('日历关闭')
+	}
+
+	const confirm = (e) => {
+		console.log('选择的日期:', e)
+
+		const [year, month] = e.fulldate.split('-')
+		currentYearMonth.value = `${year}年${parseInt(month)}月`
+	}
+
+	onMounted(() => {
+		setCurrentYearMonth()
+	})
 </script>
 
 <style>

@@ -9,7 +9,10 @@ export const useUserStore = defineStore('user', {
 		sex: "保密",
 		birthday: "未知",
 		tag: "无",
-		url: ""
+		url: "",
+		budget: 3000,
+		income: 120,
+		expenses: 300
 	}),
 	actions: {
 		updateName(newName) {
@@ -30,14 +33,22 @@ export const useUserStore = defineStore('user', {
 		updateUrl(newUrl) {
 			this.url = newUrl;
 		},
-
+		updateBudget(newBudget) {
+			this.budget = newBudget;
+		},
+		updateIncome(newIncome) {
+			this.income = newIncome;
+		},
+		updateExpenses(newExpenses) {
+			this.expenses = newExpenses;
+		},
 		// 重置用户信息
 		resetUserInfo() {
 			this.name = "请输入昵称";
 			this.sex = "保密";
 			this.birthday = "未知";
 			this.tag = "无";
-			this.url="";
+			this.url = "";
 		},
 
 		toggleSex() {
