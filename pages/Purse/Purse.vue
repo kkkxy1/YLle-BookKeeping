@@ -1,11 +1,11 @@
 <template>
     <view class="container">
-        <view class="header">
+  <!--      <view class="header">
             <view class="top">
                 我的钱包
             </view>
             <uni-icons class="compose-icon" type="compose" size="25"></uni-icons>
-        </view>
+        </view> -->
 
         <!-- 新增净资产模块 -->
         <view class="net-worth-container">
