@@ -12,11 +12,27 @@
             </view>
 
             <!--年月显示-->
-            <view class="center-section" @click="open">
-                <text class="current-date">{{ currentYearMonth }}</text>
-                <uni-icons type="arrowdown" size="14" color="#666"></uni-icons>
-            </view>
-
+       <view class="center-section">
+           <uni-icons type="left" size="16" color="#000000" @click="prevMonth"></uni-icons>
+           <text class="current-date" @click="openCalendar">{{ currentYearMonth }}</text>
+           <uni-icons type="right" size="16" color="#000000" @click="nextMonth"></uni-icons>
+       </view>
+	   
+	   <uni-popup ref="calendarPopup" type="bottom" :safe-area="true">
+	           <view class="calendar-popup-content">
+	               <view class="popup-header">
+	                   <text class="popup-title">选择日期</text>
+	                   <uni-icons type="closeempty" size="24" @click="closeCalendar"></uni-icons>
+	               </view>
+	               <uni-calendar 
+	                   :insert="true" 
+	                   :lunar="false" 
+	                   :range="false" 
+	                   @confirm="selectCalendarDate"
+	               />
+	           </view>
+	   </uni-popup>
+		   
             <!--搜索按钮-->
             <view class="right-section">
                 <navigator url="/pages/Detail/Search/Search">
@@ -25,13 +41,7 @@
             </view>
         </view>
 
-        <view class="calendar-content">
-            <view class="calendar-container">
-                <uni-calendar ref="calendar" class="uni-calendar--hook" :clear-date="true" :date="info.date"
-                    :insert="info.insert" :lunar="info.lunar" :start-date="info.startDate" :end-date="info.endDate"
-                    :range="info.range" @confirm="confirm" @close="close" />
-            </view>
-        </view>
+        
         
         <view class="box2">
             <navigator url="/pages/Detail/Budget/Budget">
@@ -130,37 +140,75 @@
             </view>
         </uni-popup>
         
-        <!-- 日期选择器 -->
-        <uni-popup ref="datePopup" type="bottom" :safe-area="true">
-            <view class="date-popup-content">
-                <view class="popup-header">
-                    <text class="popup-title">选择日期</text>
-                    <uni-icons type="closeempty" size="24" @click="closeDateSelector"></uni-icons>
-                </view>
-                <uni-calendar 
-                    :insert="true" 
-                    :lunar="false" 
-                    :range="false" 
-                    @confirm="selectDate"
-                />
-            </view>
-        </uni-popup>
-    </view>
+   </view>
 </template>
 
 <script setup>
-    import {
-        ref,
-        onMounted,
-        computed
-    } from 'vue'
-    import {
-        useUserStore
-    } from '@/stores/user'
-
-    const showCalendar = ref(true)
-    const currentYearMonth = ref("")
-
+       import {
+            ref,
+            onMounted,
+            computed
+        } from 'vue'
+       import {
+           useUserStore
+       } from '@/stores/user'
+   
+       // 修改为使用当前日期对象
+       const currentDate = ref(new Date())
+       
+       // 计算当前年月显示文本
+       const currentYearMonth = computed(() => {
+           const year = currentDate.value.getFullYear()
+           const month = currentDate.value.getMonth() + 1
+           return `${year}年${month}月`
+       })
+   
+       // 上个月
+       const prevMonth = () => {
+           const newDate = new Date(currentDate.value)
+           newDate.setMonth(newDate.getMonth() - 1)
+           currentDate.value = newDate
+           loadMonthData() // 加载该月数据
+       }
+   
+       // 下个月
+       const nextMonth = () => {
+           const newDate = new Date(currentDate.value)
+           newDate.setMonth(newDate.getMonth() + 1)
+           currentDate.value = newDate
+           loadMonthData() // 加载该月数据
+       }
+   
+       // 加载当前月份数据
+       const loadMonthData = () => {
+           const year = currentDate.value.getFullYear()
+           const month = currentDate.value.getMonth() + 1
+           console.log(`加载 ${year}年${month}月 的数据`)
+           // 这里可以添加实际加载月份数据的逻辑
+       }
+	   
+	// 添加日历弹窗的ref
+	    const calendarPopup = ref(null)
+	    
+	    // 打开日历
+	    const openCalendar = () => {
+	        calendarPopup.value?.open()
+	    }
+	    
+	    // 关闭日历
+	    const closeCalendar = () => {
+	        calendarPopup.value?.close()
+	    }
+	    
+	    // 选择日历日期
+	    const selectCalendarDate = (e) => {
+	        const dateStr = e.fulldate
+	        const dateObj = new Date(dateStr)
+	        currentDate.value = dateObj
+	        loadMonthData()
+	        closeCalendar()
+	    }
+			
     const user = useUserStore();
     const userBudget = computed(() => user.budget);
     const userIncome = computed(() => user.income);
@@ -251,60 +299,6 @@
             .reduce((sum, item) => sum + item.amount, 0)
     })
 
-    const setCurrentYearMonth = () => {
-        const now = new Date()
-        const year = now.getFullYear()
-        const month = now.getMonth() + 1
-        currentYearMonth.value = `${year}年${month}月`
-    }
-
-    const open = () => {
-        calendar.value?.open()
-    }
-
-    const close = () => {
-        console.log('日历关闭')
-    }
-
-    const confirm = (e) => {
-        console.log('选择的日期:', e)
-
-        const [year, month] = e.fulldate.split('-')
-        currentYearMonth.value = `${year}年${parseInt(month)}月`
-    }
-    
-    // 打开添加弹窗
-    const openAddModal = () => {
-        // 设置默认日期为今天
-        const today = new Date()
-        const yyyy = today.getFullYear()
-        const mm = String(today.getMonth() + 1).padStart(2, '0')
-        const dd = String(today.getDate()).padStart(2, '0')
-        newTransaction.value.date = `${yyyy}-${mm}-${dd}`
-        
-        addPopup.value.open()
-    }
-    
-    // 关闭添加弹窗
-    const closeAddModal = () => {
-        addPopup.value.close()
-    }
-    
-    // 打开日期选择器
-    const openDateSelector = () => {
-        datePopup.value.open()
-    }
-    
-    // 关闭日期选择器
-    const closeDateSelector = () => {
-        datePopup.value.close()
-    }
-    
-    // 选择日期
-    const selectDate = (e) => {
-        newTransaction.value.date = e.fulldate
-        datePopup.value.close()
-    }
     
     // 添加交易
     const addTransaction = () => {
@@ -344,9 +338,6 @@
         })
     }
 
-    onMounted(() => {
-        setCurrentYearMonth()
-    })
 </script>
 
 <style>
@@ -381,20 +372,29 @@
     }
 
     .center-section {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #ccc;
-        padding: 1px 8px;
-        border-radius: 10px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border: 1px solid #ccc;
+       padding: 1px 8px;
+       border-radius: 10px;
+       gap: 10rpx; 
+	   margin-left: 35rpx;
     }
-
-    .current-date {
-        font-size: 16px;
-        color: #000000;
-        font-family: "黑体";
-    }
-
+	
+	
+	 .calendar-popup-content {
+	        background-color: #ffffff;
+	        border-top-left-radius: 20rpx;
+	        border-top-right-radius: 20rpx;
+	        padding: 20rpx;
+	        height: 70vh;
+			margin-bottom: -68rpx;
+	    }
+	    
+	 .current-date {
+	      padding: 0 10rpx;
+	 }
     .icon-text-container {
         display: flex;
         align-items: center;
@@ -625,12 +625,13 @@
     }
     
     .date-selector {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         padding: 15rpx;
         border: 1px solid #ccc;
         border-radius: 10rpx;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
     }
     
     .icon-selector {
