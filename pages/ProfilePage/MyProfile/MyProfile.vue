@@ -2,23 +2,37 @@
 	<view class="user-info-page">
 		<view class="info-list">
 			<!-- 头像 -->
-			<view class="info-item" @click="changeAvatar">
-				<text class="label">头像</text>
-				<view class="right-content">
-					<iui-avatar class="avatar" :src="avatarUrl">
-					</iui-avatar>
-					<uni-icons type="arrowright" color="#ccc" size="16"></uni-icons>
-				</view>
+			<view class="info-item">
+			    <text class="label">头像</text>
+			    <view class="right-content">
+			        <image v-if="avatarUrl" :src="avatarUrl" class="avatar"></image>
+			        <button v-else 
+			                class="avatar-wrapper"
+			                open-type="chooseAvatar" 
+			                @chooseavatar="handleChooseAvatar">
+			            授权登录
+			        </button>
+			        <uni-icons type="arrowright" color="#ccc" size="16"></uni-icons>
+			    </view>
 			</view>
 
 			<!-- 昵称 -->
-			<view class="info-item" @click="editName">
-				<text class="label">昵称</text>
-				<view class="right-content">
-					<text class="value">{{ userName }}</text>
-					<uni-icons type="arrowright" color="#ccc" size="16"></uni-icons>
+				<view class="info-item">
+					<text class="label">昵称</text>
+					<view class="right-content">
+						<text v-if="userName && userName !== '请输入昵称'" class="value">{{ userName }}</text>
+						<button v-else
+						        class="auth-btn"
+						        @click="handleGetUserInfo">
+						    授权获取昵称
+						</button>
+						<uni-icons v-if="userName && userName !== '请输入昵称'" 
+						           type="arrowright" 
+						           color="#ccc" 
+						           size="16"
+						           @click="editName"></uni-icons>
+					</view>
 				</view>
-			</view>
 
 			<!-- ID -->
 			<view class="info-item">
@@ -62,12 +76,6 @@
 			<button class="save-btn" @click="saveChanges">保 存 修 改</button>
 		</view>
 
-		<!-- 昵称修改弹窗 -->
-		<uni-popup ref="namePopup" type="dialog">
-			<uni-popup-dialog mode="input" title="修改昵称" :value="userName" placeholder="请输入新昵称" @confirm="confirmName">
-			</uni-popup-dialog>
-		</uni-popup>
-
 		<!-- 生日选择器 -->
 		<uni-popup ref="birthdayPopup" type="bottom">
 			<uni-datetime-picker type="date" :value="userBirthday !== '未知' ? userBirthday : ''"
@@ -103,22 +111,34 @@
 	const userTag = ref(user.tag);
 	const avatarUrl = ref(user.url);
 
+	// 获取头像
+	const handleChooseAvatar = (e) => {
+	  const tempFilePath = e.detail.avatarUrl;
+	  avatarUrl.value = tempFilePath;
+
+	  user.updateUrl(tempFilePath);
+	};
+	
+	// 处理获取用户信息（昵称）
+	const handleGetUserInfo = async () => {
+	  try {
+	    const res = await uni.getUserProfile({
+	      desc: '用于完善会员资料'
+	    });
+	    if (res.userInfo) {
+	      const nickName = res.userInfo.nickName;
+	      userName.value = nickName;
+	      user.updateName(nickName);
+	    }
+	  } catch (err) {
+	    console.error('获取用户信息失败:', err);
+	  }
+	};
+	
 	// 弹窗引用
-	const namePopup = ref(null);
 	const birthdayPopup = ref(null);
 	const tagPopup = ref(null);
 
-	// 编辑昵称
-	const editName = () => {
-		namePopup.value.open();
-	};
-
-	// 确认修改昵称
-	const confirmName = (value) => {
-		if (value && value.trim()) {
-			userName.value = value.trim();
-		}
-	};
 
 	// 修改性别
 	const changeSex = () => {
@@ -146,20 +166,6 @@
 		if (value !== undefined) {
 			userTag.value = value || '无';
 		}
-	};
-
-	// 更换头像
-	const changeAvatar = () => {
-		uni.chooseImage({
-			count: 1,
-			success: (res) => {
-				avatarUrl.value = res.tempFilePaths[0];
-				uni.showToast({
-					title: '头像已更新',
-					icon: 'success'
-				});
-			}
-		});
 	};
 
 	// 保存修改
@@ -234,8 +240,49 @@
 		background-color: #fff;
 		border-radius: 10rpx;
 		overflow: hidden;
+	} 
+	
+	.avatar {
+	    width: 90rpx;
+	    height: 90rpx;
+	    border-radius: 50%;
 	}
-
+	
+	.avatar-wrapper {
+        width: 90rpx;
+        height: 90rpx;
+        border-radius: 50%;
+		color: #646464;
+		padding: 0;
+		font-size: 20rpx;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		padding-bottom: 20rpx; 
+		box-sizing: border-box; 
+	}
+	
+	.auth-btn {
+	  background: none;
+	  border: none;
+	  padding: 0;
+	  margin: 0;
+	  font-size: 28rpx;
+	  color: #999;
+	  line-height: 1;
+	  height: auto;
+	}
+	
+	.auth-btn::after {
+	  border: none;
+	}
+	
+	.right-content {
+	  display: flex;
+	  align-items: center;
+	  gap: 10rpx;
+	}
+	
 	.info-item {
 		display: flex;
 		justify-content: space-between;
