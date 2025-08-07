@@ -3,30 +3,23 @@
 		<view class="info-list">
 			<!-- 头像 -->
 			<view class="info-item">
-			    <text class="label">头像</text>
-			    <view class="right-content">
-			        <image v-if="avatarUrl" :src="avatarUrl" class="avatar"></image>
-			        <button v-else 
-			                class="avatar-wrapper"
-			                open-type="chooseAvatar" 
-			                @chooseavatar="handleChooseAvatar">
-			            授权登录
-			        </button>
-			        <uni-icons type="arrowright" color="#ccc" size="16"></uni-icons>
-			    </view>
+				<text class="label">头像</text>
+				<view class="right-content">
+					<image v-if="avatarUrl" :src="avatarUrl" class="avatar"></image>
+					<button v-else class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="handleChooseAvatar">
+						授权登录
+					</button>
+					<uni-icons type="arrowright" color="#ccc" size="16"></uni-icons>
+				</view>
 			</view>
 
 			<!-- 昵称 -->
-				<view class="info-item">
-					<text class="label">昵称</text>
-					<view class="right-content">
-				     <input type="nickname" 
-				            class="weui-input" 
-				            placeholder="请输入昵称"
-							v-model="userName"
-							/>
-					</view>
+			<view class="info-item">
+				<text class="label">昵称</text>
+				<view class="right-content">
+					<input type="nickname" class="weui-input" placeholder="请输入昵称" v-model="userName" />
 				</view>
+			</view>
 
 			<!-- ID -->
 			<view class="info-item">
@@ -107,13 +100,13 @@
 
 	// 获取头像
 	const handleChooseAvatar = (e) => {
-	  const tempFilePath = e.detail.avatarUrl;
-	  avatarUrl.value = tempFilePath;
+		const tempFilePath = e.detail.avatarUrl;
+		avatarUrl.value = tempFilePath;
 
-	  //user.updateUrl(tempFilePath);
+		//user.updateUrl(tempFilePath);
 	};
-	
-	
+
+
 	// 弹窗引用
 	const birthdayPopup = ref(null);
 	const tagPopup = ref(null);
@@ -219,53 +212,53 @@
 		background-color: #fff;
 		border-radius: 10rpx;
 		overflow: hidden;
-	} 
-	
-	.avatar {
-	    width: 90rpx;
-	    height: 90rpx;
-	    border-radius: 50%;
 	}
-	
+
+	.avatar {
+		width: 90rpx;
+		height: 90rpx;
+		border-radius: 50%;
+	}
+
 	.avatar-wrapper {
-        width: 90rpx;
-        height: 90rpx;
-        border-radius: 50%;
+		width: 90rpx;
+		height: 90rpx;
+		border-radius: 50%;
 		color: #646464;
 		padding: 0;
 		font-size: 20rpx;
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
-		padding-bottom: 20rpx; 
-		box-sizing: border-box; 
+		padding-bottom: 20rpx;
+		box-sizing: border-box;
 	}
-	
+
 	.auth-btn {
-	  background: none;
-	  border: none;
-	  padding: 0;
-	  margin: 0;
-	  font-size: 28rpx;
-	  color: #999;
-	  line-height: 1;
-	  height: auto;
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		font-size: 28rpx;
+		color: #999;
+		line-height: 1;
+		height: auto;
 	}
-	
+
 	.auth-btn::after {
-	  border: none;
+		border: none;
 	}
-	
-	.weui-input{
+
+	.weui-input {
 		font-size: 28rpx;
 	}
-	
+
 	.right-content {
-	  display: flex;
-	  align-items: center;
-	  gap: 10rpx;
+		display: flex;
+		align-items: center;
+		gap: 10rpx;
 	}
-	
+
 	.info-item {
 		display: flex;
 		justify-content: space-between;
