@@ -22,7 +22,9 @@
 					<view class="right-content">
 				     <input type="nickname" 
 				            class="weui-input" 
-				            placeholder="请输入昵称"/>
+				            placeholder="请输入昵称"
+							v-model="userName"
+							/>
 					</view>
 				</view>
 
@@ -108,12 +110,9 @@
 	  const tempFilePath = e.detail.avatarUrl;
 	  avatarUrl.value = tempFilePath;
 
-	  user.updateUrl(tempFilePath);
+	  //user.updateUrl(tempFilePath);
 	};
 	
-	const updateNickname = () => {
-	  user.updateName(userName.value);
-	}
 	
 	// 弹窗引用
 	const birthdayPopup = ref(null);
