@@ -162,7 +162,7 @@
 			success: (res) => {
 				if (res.confirm) {
 					user.resetUserInfo();
-					userName.value = user.name;
+					userName.value = null;
 					userSex.value = user.sex;
 					userBirthday.value = user.birthday;
 					userTag.value = user.tag;
@@ -251,6 +251,8 @@
 
 	.weui-input {
 		font-size: 28rpx;
+		text-align: end;
+		margin-right: 10rpx;
 	}
 
 	.right-content {
