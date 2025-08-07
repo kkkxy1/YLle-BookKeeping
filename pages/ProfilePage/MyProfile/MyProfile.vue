@@ -20,17 +20,9 @@
 				<view class="info-item">
 					<text class="label">昵称</text>
 					<view class="right-content">
-						<text v-if="userName && userName !== '请输入昵称'" class="value">{{ userName }}</text>
-						<button v-else
-						        class="auth-btn"
-						        @click="handleGetUserInfo">
-						    授权获取昵称
-						</button>
-						<uni-icons v-if="userName && userName !== '请输入昵称'" 
-						           type="arrowright" 
-						           color="#ccc" 
-						           size="16"
-						           @click="editName"></uni-icons>
+				     <input type="nickname" 
+				            class="weui-input" 
+				            placeholder="请输入昵称"/>
 					</view>
 				</view>
 
@@ -119,21 +111,9 @@
 	  user.updateUrl(tempFilePath);
 	};
 	
-	// 处理获取用户信息（昵称）
-	const handleGetUserInfo = async () => {
-	  try {
-	    const res = await uni.getUserProfile({
-	      desc: '用于完善会员资料'
-	    });
-	    if (res.userInfo) {
-	      const nickName = res.userInfo.nickName;
-	      userName.value = nickName;
-	      user.updateName(nickName);
-	    }
-	  } catch (err) {
-	    console.error('获取用户信息失败:', err);
-	  }
-	};
+	const updateNickname = () => {
+	  user.updateName(userName.value);
+	}
 	
 	// 弹窗引用
 	const birthdayPopup = ref(null);
@@ -275,6 +255,10 @@
 	
 	.auth-btn::after {
 	  border: none;
+	}
+	
+	.weui-input{
+		font-size: 28rpx;
 	}
 	
 	.right-content {
