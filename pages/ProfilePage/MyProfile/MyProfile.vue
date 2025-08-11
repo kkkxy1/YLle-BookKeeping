@@ -89,7 +89,10 @@
 	import {
 		onLoad
 	} from '@dcloudio/uni-app';
-
+	import {
+		updateUserInfo
+	} from '@/api/index'
+	
 	const user = useUserStore();
 	const userName = ref(user.name);
 	const userID = ref(user.id);
@@ -148,9 +151,24 @@
 		user.updateTag(userTag.value);
 		user.updateUrl(avatarUrl.value);
 
-		uni.showToast({
-			title: '保存成功',
-			icon: 'success'
+		const newInfo={
+			username:user.name,
+			avatarUrl:user.url
+		}
+		
+		console.log(newInfo);
+		
+		updateUserInfo(newInfo).then(res=>{
+			uni.showToast({
+				title: '保存成功',
+				icon: 'success'
+			});
+		}).catch(err => {
+			uni.showToast({
+				title: '保存失败',
+				icon: 'fail'
+			});
+			console.error('保存失败:', err)
 		});
 	};
 
