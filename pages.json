@@ -5,97 +5,91 @@
 		}
 	},
 	"pages": [{
-			"path" : "pages/Detail/Detail",
-			"style" : 
-			{
-				"navigationBarTitleText" : "明细"
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}, {
+			"path": "pages/Detail/Detail",
+			"style": {
+				"navigationBarTitleText": "明细"
 			}
 		},
-		
+
 		{
-		"path": "pages/Purse/Purse",
-		"style": {
-			"navigationBarTitleText": "钱包"
-		}
-	},
-	 
-	{
-		"path" : "pages/ProfilePage/ProfilePage",
-		"style" : 
+			"path": "pages/Purse/Purse",
+			"style": {
+				"navigationBarTitleText": "钱包"
+			}
+		},
+
 		{
-			"navigationBarTitleText" : "我的"
-		}
-	},
-	{
-		"path" : "pages/ProfilePage/MyProfile/MyProfile",
-		"style" : 
+			"path": "pages/ProfilePage/ProfilePage",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
 		{
-			"navigationBarTitleText" : "我的资料"
-		}
-	},
-	{
-		"path" : "pages/Purse/Xianjin/Xianjin",
-		"style" : 
+			"path": "pages/ProfilePage/MyProfile/MyProfile",
+			"style": {
+				"navigationBarTitleText": "我的资料"
+			}
+		},
 		{
-			"navigationBarTitleText" : "现金"
-		}
-	},
-	{
-		"path" : "pages/Purse/Chuxuka/Chuxuka",
-		"style" : 
+			"path": "pages/Purse/Xianjin/Xianjin",
+			"style": {
+				"navigationBarTitleText": "现金"
+			}
+		},
 		{
-			"navigationBarTitleText" : "储蓄卡"
-		}
-	},
-	{
-		"path" : "pages/Purse/Xinyongka/Xinyongka",
-		"style" : 
+			"path": "pages/Purse/Chuxuka/Chuxuka",
+			"style": {
+				"navigationBarTitleText": "储蓄卡"
+			}
+		},
 		{
-			"navigationBarTitleText" : "信用卡"
-		}
-	},
-	{
-		"path" : "pages/Purse/Zhifubao/Zhifubao",
-		"style" : 
+			"path": "pages/Purse/Xinyongka/Xinyongka",
+			"style": {
+				"navigationBarTitleText": "信用卡"
+			}
+		},
 		{
-			"navigationBarTitleText" : "支付宝"
-		}
-	},
-	{
-		"path" : "pages/Purse/Wechat/Wechat",
-		"style" : 
+			"path": "pages/Purse/Zhifubao/Zhifubao",
+			"style": {
+				"navigationBarTitleText": "支付宝"
+			}
+		},
 		{
-			"navigationBarTitleText" : "微信"
-		}
-	},
-	{
-		"path" : "pages/Detail/Daily/Daily",
-		"style" : 
+			"path": "pages/Purse/Wechat/Wechat",
+			"style": {
+				"navigationBarTitleText": "微信"
+			}
+		},
 		{
-			"navigationBarTitleText" : "日常"
-		}
-	},
-	{
-		"path" : "pages/Detail/Search/Search",
-		"style" : 
+			"path": "pages/Detail/Daily/Daily",
+			"style": {
+				"navigationBarTitleText": "日常"
+			}
+		},
 		{
-			"navigationBarTitleText" : "搜索"
-		}
-	},
-	{
-		"path" : "pages/Detail/Add/Add",
-		"style" : 
+			"path": "pages/Detail/Search/Search",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
+		},
 		{
-			"navigationBarTitleText" : "支出"
-		}
-	},
-	{
-		"path" : "pages/Detail/Budget/Budget",
-		"style" : 
+			"path": "pages/Detail/Add/Add",
+			"style": {
+				"navigationBarTitleText": "支出"
+			}
+		},
 		{
-			"navigationBarTitleText" : "日常账本预算设置"
+			"path": "pages/Detail/Budget/Budget",
+			"style": {
+				"navigationBarTitleText": "日常账本预算设置"
+			}
 		}
-	}],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -106,11 +100,10 @@
 		}
 	},
 	"tabBar": {
-		"color": "#dadada",       
-		"selectedColor": "#000000",   
-		"backgroundColor": "#ffffff",  
-		"list": [
-			{
+		"color": "#dadada",
+		"selectedColor": "#000000",
+		"backgroundColor": "#ffffff",
+		"list": [{
 				"text": "钱包",
 				"pagePath": "pages/Purse/Purse",
 				"iconPath": "/static/wallet.png",
@@ -128,7 +121,7 @@
 				"iconPath": "/static/my.png",
 				"selectedIconPath": "/static/myfill.png"
 			}
-		
+
 		]
 	}
 }

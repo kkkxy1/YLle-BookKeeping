@@ -2,21 +2,22 @@
 	<view class="user-info-page">
 		<view class="info-list">
 			<!-- 头像 -->
-			<view class="info-item" @click="changeAvatar">
+			<view class="info-item">
 				<text class="label">头像</text>
 				<view class="right-content">
-					<iui-avatar class="avatar" :src="avatarUrl">
-					</iui-avatar>
+					<image v-if="avatarUrl" :src="avatarUrl" class="avatar"></image>
+					<button v-else class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="handleChooseAvatar">
+						授权登录
+					</button>
 					<uni-icons type="arrowright" color="#ccc" size="16"></uni-icons>
 				</view>
 			</view>
 
 			<!-- 昵称 -->
-			<view class="info-item" @click="editName">
+			<view class="info-item">
 				<text class="label">昵称</text>
 				<view class="right-content">
-					<text class="value">{{ userName }}</text>
-					<uni-icons type="arrowright" color="#ccc" size="16"></uni-icons>
+					<input type="nickname" class="weui-input" placeholder="请输入昵称" v-model="userName" />
 				</view>
 			</view>
 
@@ -62,12 +63,6 @@
 			<button class="save-btn" @click="saveChanges">保 存 修 改</button>
 		</view>
 
-		<!-- 昵称修改弹窗 -->
-		<uni-popup ref="namePopup" type="dialog">
-			<uni-popup-dialog mode="input" title="修改昵称" :value="userName" placeholder="请输入新昵称" @confirm="confirmName">
-			</uni-popup-dialog>
-		</uni-popup>
-
 		<!-- 生日选择器 -->
 		<uni-popup ref="birthdayPopup" type="bottom">
 			<uni-datetime-picker type="date" :value="userBirthday !== '未知' ? userBirthday : ''"
@@ -94,6 +89,10 @@
 	import {
 		onLoad
 	} from '@dcloudio/uni-app';
+	import {
+		updateUserInfo,
+		uploadFile
+	} from '@/api/index'
 
 	const user = useUserStore();
 	const userName = ref(user.name);
@@ -102,23 +101,19 @@
 	const userBirthday = ref(user.birthday);
 	const userTag = ref(user.tag);
 	const avatarUrl = ref(user.url);
+	// 获取头像
+	const handleChooseAvatar = (e) => {
+		const tempFilePath = e.detail.avatarUrl;
+		avatarUrl.value = tempFilePath;
+
+		//user.updateUrl(tempFilePath);
+	};
+
 
 	// 弹窗引用
-	const namePopup = ref(null);
 	const birthdayPopup = ref(null);
 	const tagPopup = ref(null);
 
-	// 编辑昵称
-	const editName = () => {
-		namePopup.value.open();
-	};
-
-	// 确认修改昵称
-	const confirmName = (value) => {
-		if (value && value.trim()) {
-			userName.value = value.trim();
-		}
-	};
 
 	// 修改性别
 	const changeSex = () => {
@@ -148,20 +143,6 @@
 		}
 	};
 
-	// 更换头像
-	const changeAvatar = () => {
-		uni.chooseImage({
-			count: 1,
-			success: (res) => {
-				avatarUrl.value = res.tempFilePaths[0];
-				uni.showToast({
-					title: '头像已更新',
-					icon: 'success'
-				});
-			}
-		});
-	};
-
 	// 保存修改
 	const saveChanges = () => {
 		user.updateName(userName.value);
@@ -170,9 +151,42 @@
 		user.updateTag(userTag.value);
 		user.updateUrl(avatarUrl.value);
 
-		uni.showToast({
-			title: '保存成功',
-			icon: 'success'
+		const newInfo = {
+			username: user.name,
+			avatarUrl: user.url
+		}
+
+
+		uni.downloadFile({
+			url: newInfo.avatarUrl,
+			success: (res) => {
+				if (res.statusCode === 200) {
+					console.log(res);
+					console.log('下载成功');
+					uploadFile({
+						filePath: res.tempFilePath,
+						name: 'file',
+						formData: {}
+					}).then(url => {
+						console.log('上传头像成功：', url);
+						newInfo.avatarUrl = JSON.parse(url).url;
+						updateUserInfo(newInfo).then(res => {
+							uni.showToast({
+								title: '保存成功',
+								icon: 'success'
+							});
+						}).catch(err => {
+							uni.showToast({
+								title: '保存失败',
+								icon: 'fail'
+							});
+							console.error('保存失败:', err)
+						});
+					}).catch(err => {
+						console.error('上传头像失败:', err)
+					});
+				}
+			}
 		});
 	};
 
@@ -184,7 +198,7 @@
 			success: (res) => {
 				if (res.confirm) {
 					user.resetUserInfo();
-					userName.value = user.name;
+					userName.value = null;
 					userSex.value = user.sex;
 					userBirthday.value = user.birthday;
 					userTag.value = user.tag;
@@ -206,6 +220,7 @@
 		userSex.value = user.sex;
 		userBirthday.value = user.birthday;
 		userTag.value = user.tag;
+		avatarUrl.value = user.url;
 	});
 </script>
 
@@ -234,6 +249,53 @@
 		background-color: #fff;
 		border-radius: 10rpx;
 		overflow: hidden;
+	}
+
+	.avatar {
+		width: 90rpx;
+		height: 90rpx;
+		border-radius: 50%;
+	}
+
+	.avatar-wrapper {
+		width: 90rpx;
+		height: 90rpx;
+		border-radius: 50%;
+		color: #646464;
+		padding: 0;
+		font-size: 20rpx;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		padding-bottom: 20rpx;
+		box-sizing: border-box;
+	}
+
+	.auth-btn {
+		background: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		font-size: 28rpx;
+		color: #999;
+		line-height: 1;
+		height: auto;
+	}
+
+	.auth-btn::after {
+		border: none;
+	}
+
+	.weui-input {
+		font-size: 28rpx;
+		text-align: end;
+		margin-right: 10rpx;
+	}
+
+	.right-content {
+		display: flex;
+		align-items: center;
+		gap: 10rpx;
 	}
 
 	.info-item {
