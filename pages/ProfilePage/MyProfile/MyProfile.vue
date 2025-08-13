@@ -93,7 +93,7 @@
 		updateUserInfo,
 		uploadFile
 	} from '@/api/index'
-	
+
 	const user = useUserStore();
 	const userName = ref(user.name);
 	const userID = ref(user.id);
@@ -151,22 +151,26 @@
 		user.updateTag(userTag.value);
 		user.updateUrl(avatarUrl.value);
 
-		const newInfo={
-			username:user.name,
-			avatarUrl:user.url
+		const newInfo = {
+			username: user.name,
+			avatarUrl: user.url
 		}
-		
-		
+
+
 		uni.downloadFile({
 			url: newInfo.avatarUrl,
 			success: (res) => {
 				if (res.statusCode === 200) {
 					console.log(res);
 					console.log('下载成功');
-					uploadFile({filePath:res.tempFilePath,name:'file',formData:{}}).then(url=>{
-						console.log('上传头像成功：',url);
-						newInfo.avatarUrl=JSON.parse(url).url;
-						updateUserInfo(newInfo).then(res=>{
+					uploadFile({
+						filePath: res.tempFilePath,
+						name: 'file',
+						formData: {}
+					}).then(url => {
+						console.log('上传头像成功：', url);
+						newInfo.avatarUrl = JSON.parse(url).url;
+						updateUserInfo(newInfo).then(res => {
 							uni.showToast({
 								title: '保存成功',
 								icon: 'success'
@@ -216,7 +220,7 @@
 		userSex.value = user.sex;
 		userBirthday.value = user.birthday;
 		userTag.value = user.tag;
-		avatarUrl.value=user.url;
+		avatarUrl.value = user.url;
 	});
 </script>
 

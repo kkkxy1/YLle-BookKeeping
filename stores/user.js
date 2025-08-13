@@ -16,16 +16,16 @@ export const useUserStore = defineStore('user', {
 	}),
 	actions: {
 		updateName(newName) {
-		  if (newName && newName.trim()) {
-		    this.name = newName.trim();
-		   }
+			if (newName && newName.trim()) {
+				this.name = newName.trim();
+			}
 		},
-		    
-	    // 更新头像
+
+		// 更新头像
 		updateAvatar(newAvatar) {
-		   if (newAvatar) {
-		    this.url = newAvatar;
-		    }
+			if (newAvatar) {
+				this.url = newAvatar;
+			}
 		},
 		updateSex(newSex) {
 			this.sex = newSex;

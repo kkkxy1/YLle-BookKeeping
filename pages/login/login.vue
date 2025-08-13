@@ -105,11 +105,11 @@
 		}).then(res => {
 			// 登录成功处理
 			uni.setStorageSync('token', res.token);
-			const user=useUserStore();
+			const user = useUserStore();
 			user.updateAvatar(res.data.user.avatarUrl);
 			user.updateName(res.data.user.username);
 			user.updateId(res.data.user.id);
-			
+
 			uni.showToast({
 				title: '登录成功',
 				icon: 'success'
