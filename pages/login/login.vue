@@ -110,7 +110,6 @@
 			user.updateName(res.data.user.username);
 			user.updateId(res.data.user.id);
 			
-			
 			uni.showToast({
 				title: '登录成功',
 				icon: 'success'

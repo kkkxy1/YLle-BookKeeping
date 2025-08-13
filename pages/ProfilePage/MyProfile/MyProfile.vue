@@ -90,7 +90,8 @@
 		onLoad
 	} from '@dcloudio/uni-app';
 	import {
-		updateUserInfo
+		updateUserInfo,
+		uploadFile
 	} from '@/api/index'
 	
 	const user = useUserStore();
@@ -100,7 +101,6 @@
 	const userBirthday = ref(user.birthday);
 	const userTag = ref(user.tag);
 	const avatarUrl = ref(user.url);
-
 	// 获取头像
 	const handleChooseAvatar = (e) => {
 		const tempFilePath = e.detail.avatarUrl;
@@ -156,19 +156,33 @@
 			avatarUrl:user.url
 		}
 		
-		console.log(newInfo);
 		
-		updateUserInfo(newInfo).then(res=>{
-			uni.showToast({
-				title: '保存成功',
-				icon: 'success'
-			});
-		}).catch(err => {
-			uni.showToast({
-				title: '保存失败',
-				icon: 'fail'
-			});
-			console.error('保存失败:', err)
+		uni.downloadFile({
+			url: newInfo.avatarUrl,
+			success: (res) => {
+				if (res.statusCode === 200) {
+					console.log(res);
+					console.log('下载成功');
+					uploadFile({filePath:res.tempFilePath,name:'file',formData:{}}).then(url=>{
+						console.log('上传头像成功：',url);
+						newInfo.avatarUrl=JSON.parse(url).url;
+						updateUserInfo(newInfo).then(res=>{
+							uni.showToast({
+								title: '保存成功',
+								icon: 'success'
+							});
+						}).catch(err => {
+							uni.showToast({
+								title: '保存失败',
+								icon: 'fail'
+							});
+							console.error('保存失败:', err)
+						});
+					}).catch(err => {
+						console.error('上传头像失败:', err)
+					});
+				}
+			}
 		});
 	};
 
@@ -202,6 +216,7 @@
 		userSex.value = user.sex;
 		userBirthday.value = user.birthday;
 		userTag.value = user.tag;
+		avatarUrl.value=user.url;
 	});
 </script>
 

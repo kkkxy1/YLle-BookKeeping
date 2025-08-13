@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', {
 	    // 更新头像
 		updateAvatar(newAvatar) {
 		   if (newAvatar) {
-		    this.avatarUrl = newAvatar;
+		    this.url = newAvatar;
 		    }
 		},
 		updateSex(newSex) {
